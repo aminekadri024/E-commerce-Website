@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../context/GlobalProductsContext";
 import Text from "../components/Text";
 import { assets } from "../assets/frontend_assets/assets";
+import CartTotal from "../components/cartTotal";
 
 export default function Cart() {
-    const { getCartCount, products, currency, cartItem, updateQuantity } = useContext(ProductsContext)
+    const { getCartCount, products, currency, cartItem, updateQuantity, navigate } = useContext(ProductsContext)
     const [cartData, setCartData] = useState([]);
     useEffect(() => {
         let tempData = []
@@ -29,24 +30,32 @@ export default function Cart() {
                     cartData.map((item, index) => {
                         const productData = products.find(product => product._id === item._id);
                         return (
-                            <div key={index} className="py-4 text-gray-700 rounded-lg shadow grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
+                            <div key={index} className="p-4 text-gray-700 rounded-lg shadow grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
                                 <div className="flex items-start gap-6">
-                                    <img className="w-16 sm:w-20" src={productData.image[0]} alt={productData.name} />
+                                    <img className="w-16 rounded-sm sm:w-20" src={productData.image[0]} alt={productData.name} />
                                     <div>
                                         <p className="text-xs sm:text-lg font-medium">{productData.name}</p>
                                         <div className="flex items-center gap-5 mt-2">
                                             <p>{currency}{productData.price}</p>
-                                            <p className="px-1 sm:px-2 text-xs sm:text-lg sm:py-1 border bg-slate-50">{item.size}</p>
+                                            <p className="px-1 sm:px-2 text-xs sm:text-lg sm:py-1 border rounded-lg bg-slate-50">{item.size}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <input className="border rounded-lg max-w-10 sm:max-w-20 px-1 sm:px-2 py-1 bg-slate-50" type="number" min={1} defaultValue={item.quantity} />
+                                <input onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, e.target.value)} className="border rounded-lg max-w-10 px-1 sm:px-2 py-0.5 bg-slate-50" type="number" min={1} defaultValue={item.quantity} />
                                 <img onClick={() => updateQuantity(item._id, item.size, 0)} className="w-4 mr-4 sm:w-5 cursor-pointer" src={assets.bin_icon} alt="" />
                             </div>
                         )
                     })
                     : null
             }
+            <div className="flex justify-end my-20">
+                <div className="w-full sm:w-[450px]">
+                    <CartTotal />
+                    <div className="w-full text-center mt-4">
+                        <button onClick={() => navigate('/place_order')} className="bg-grad mx-auto py-1 px-1.5 sm:py-2 sm:px-2.5 rounded-xl text-white text-sm cursor-pointer sm:text-lg">PROCEED TO CHECKOUT</button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
