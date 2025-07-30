@@ -14,4 +14,7 @@
   .size-btn {
     @apply px-2 border w-1/6 hover:border-black hover:text-black duration-500 cursor-pointer py-2 text-sm font-semibold rounded-lg;
   }
+  .place-order-input {
+    @apply bg-white border border-gray-300 flex-1 py-1 px-1.5 rounded-sm max-w-full max-h-10;
+  }
 }

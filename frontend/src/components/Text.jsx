@@ -2,7 +2,7 @@ const Text = ({ text1, text2 }) => {
     return (
         <div className="flex flex-col text-center items-center h-fit mx-auto my-16 max-w-lg">
             {/* Gradient Heading */}
-            <h1 className="inline-block text-2xl sm:text-3xl lg:text-5xl mb-4 font-bold bg-grad text-transparent bg-clip-text">
+            <h1 className="inline-block text-2xl sm:text-3xl lg:text-3xl mb-4 font-bold bg-grad text-transparent bg-clip-text">
                 {text1}
             </h1>
 

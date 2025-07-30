@@ -52,7 +52,7 @@ export default function Cart() {
                 <div className="w-full sm:w-[450px]">
                     <CartTotal />
                     <div className="w-full text-center mt-4">
-                        <button onClick={() => navigate('/place_order')} className="bg-grad mx-auto py-1 px-1.5 sm:py-2 sm:px-2.5 rounded-xl text-white text-sm cursor-pointer sm:text-lg">PROCEED TO CHECKOUT</button>
+                        <button onClick={() => navigate('/place_order')} className="bg-grad mx-auto font-semibold py-1 px-6 sm:py-2 sm:px-8 rounded-xl text-white text-sm cursor-pointer sm:text-md">PROCEED TO CHECKOUT</button>
                     </div>
                 </div>
             </div>
